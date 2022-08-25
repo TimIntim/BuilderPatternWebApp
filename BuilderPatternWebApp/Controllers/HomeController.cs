@@ -27,10 +27,17 @@ namespace BuilderPatternWebApp.Controllers
             _director.BuildEnterprisePlan();
             model.EnterprisePlan = enterprisePlanBuilder.GetPlan();
 
-            var customPlanBuilder = new BasicPlanBuilder();
-            customPlanBuilder.BuildDiskSpaceFeature();
-            customPlanBuilder.BuildBandwidthFeature();
-            model.CustomPlan = customPlanBuilder.GetPlan();
+            //var customPlanBuilder = new BasicPlanBuilder();
+            //customPlanBuilder.BuildDiskSpaceFeature();
+            //customPlanBuilder.BuildBandwidthFeature();
+            //model.CustomPlan = customPlanBuilder.GetPlan();
+
+            var customPlanBuilder = new CustomPlanFluentBuilder();
+            model.CustomPlan = customPlanBuilder
+                .BuildDiskSpaceFeature()
+                .BuildBandwidthFeature()
+                .GetPlan();
+            
 
             return View(model);
         }
